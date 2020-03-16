@@ -96,7 +96,7 @@ prolog_to_minizinc(T,Output,Loop_vars,Types) :-
 	
 	matches_to_outputs([
 		[[append(A,B,C)],["(",A1,"++",B1,"==",C1,")"]],
-		[[nth1(A,B,C)],["(= (select ",B1,"  (+ 1",A1,")) ",C1,"))"]],
+		[[nth1(A,B,C)],["(= (select ",B1,"  (+ 1 ",A1,")) ",C1,"))"]],
 		[[nth0(A,B,C)],["(= (select ",B1," ",A1,") ",C1,"))"]],
 		[[union(A,B,C)],[("(",C1, "== ",A1," union ",B1,")")]],
 		[[intersection(A,B,C)],[("(",C1, "== ",A1," intersection ",B1,")")]]
