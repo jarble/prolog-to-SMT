@@ -12,7 +12,10 @@ main :-
 demo :-
 	%A>1.1,
 	%B = sqrt(A),
-	nth1(B1,L,1.1).
+	%A = [1,2,3],
+	length(A,L),
+	length(B,L),
+	append(A,B,C).
 
 same_length(A,B) :-
     length(A,L),

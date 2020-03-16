@@ -72,7 +72,7 @@ has_type(Var:bool,List) :-
 		[[maplist(A,B)],[A:atom,B:[list,_,_]]],
 		[[findall(A,B,C)],[[A,C]:[list,_,[list,_,T]],B:bool]],
 		[[member(A,B),memberchk(A,B)],[A:T,B:[List_or_set,_,T]]],
-		[[length(A,B)],[[A:[list,B,_]],B:number]],
+		[[length(A,B)],[A:string,B:number]],
 		[[(A,B),(A;B),(A->B),foreach(A,B),forall(A,B),\+ (call(A),\+call(B))],[[A,B]:[list,_,bool]]],
 		[[sort(A,B),msort(A,B)],[[A,B]:[list,_,_]]],
 		[[is_list(A)],[A:[list,_,_]]],
@@ -87,9 +87,8 @@ has_type(Var:bool,List) :-
 		[[nth0(Index,List1,Elem),nth1(Index,List1,Elem)],[Elem:T,List1:[list,_,T],Index:int]],
 		[[all_different(A),all_distinct(A)],[A:[list,_,int]]]
 	],Var,List);
-	T3 #= T1 + T2,T1 #> 0,T2 #> 0,T3 #> 0,
 	matches_types([
-		[[append(A,B,C)],[A:[list,T1,Type],B:[list,T2,Type],C:[list,T3,Type]]]
+		[[append(A,B,C)],[A:string,B:string,C:string]]
 	],Var,List)
 	;
 	

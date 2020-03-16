@@ -18,6 +18,7 @@ type_([list,_,T],["(Array Int ",T1,")"]) :- type_(T,T1).
 type(bool,"Bool").
 type(number,"Real").
 type(int,"Int").
+type(string,"String").
 
 remove_var([]).
 remove_var([Loop_var|Rest]) :-
@@ -95,7 +96,7 @@ prolog_to_minizinc(T,Output,Loop_vars,Types) :-
 	],T,Output);
 	
 	matches_to_outputs([
-		[[append(A,B,C)],["(",A1,"++",B1,"==",C1,")"]],
+		[[append(A,B,C)],["(str.++ ",A1," ",B1," ",C1,")"]],
 		[[nth1(A,B,C)],["(= (select ",B1,"  (+ 1 ",A1,")) ",C1,"))"]],
 		[[nth0(A,B,C)],["(= (select ",B1," ",A1,") ",C1,"))"]],
 		[[union(A,B,C)],[("(",C1, "== ",A1," union ",B1,")")]],
@@ -128,7 +129,7 @@ prolog_to_minizinc(T,Output,Loop_vars,Types) :-
 		
 	matches_to_outputs([
 		[[(A;B)],["(or ",A1," ",B1,")"]],
-		[[length(A,B)],["(length(",A1,") == ",B1,")"]],
+		[[length(A,B)],["(= (str.len ",A1,") ",B1,")"]],
 		[[(A,B)],["(and ",A1," ",B1,")"]],
 		[[(A+B)],["(+ ",A1," ",B1,")"]],
 		[[(A/B)],["(/ ",A1," ",B1,")"]],
@@ -146,7 +147,8 @@ prolog_to_minizinc(T,Output,Loop_vars,Types) :-
 		[[max_list(A,B)],["(",B1,"==max(",A1,"))"]],
 		[[min_list(A,B)],["(",B1,"==min(",A1,"))"]],
 		[[subset(A,B)],["(",A," subset ",A,")"]],
-		[[not(A),\+(A)],["(not ",A1,")"]]
+		[[not(A),\+(A)],["(not ",A1,")"]],
+		[[prefix(A,B)],["(str.prefixof ",A1," ",B1,")"]]
 	],T,Output),
 	prolog_to_minizinc(A,A1,Loop_vars,Types),
 	prolog_to_minizinc(B,B1,Loop_vars,Types);
