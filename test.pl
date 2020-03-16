@@ -10,8 +10,9 @@ main :-
         close(Stream).
 
 demo :-
-	A>1.1,
-	B is sqrt(A).
+	%A>1.1,
+	%B = sqrt(A),
+	nth1(B1,L,1.1).
 
 same_length(A,B) :-
     length(A,L),

@@ -1,5 +1,4 @@
 :- module(partial_evaluation, [find_all_clauses/2]).
-:- set_prolog_flag(readline, readline).
 
 
 replace_all_vars_([],[]).
@@ -24,7 +23,7 @@ matches_any(A,B) :-
 	nonvar(A),matches_any_(A,B).
 
 find_all_clauses(Var,Var) :-
-	\+callable(Var);var(Var);is_list(Var);matches_any([length(_,_),_>_,_<_,_=_,_==_,_\=_,_\==_,_=<_,_=<_,dif(_,_),_ is _,false,true,max_list(_,_),min_list(_,_),union(_,_,_),intersection(_,_,_),subset(_,_),all_different(_),all_distinct(_)],Var).
+	\+callable(Var);var(Var);is_list(Var);matches_any([length(_,_),_>_,_<_,_=_,_==_,_\=_,_\==_,_=<_,_=<_,dif(_,_),_ is _,false,true,max_list(_,_),min_list(_,_),union(_,_,_),intersection(_,_,_),subset(_,_),all_different(_),all_distinct(_),nth0(_,_,_),nth1(_,_,_)],Var).
 
 find_all_clauses(Var,Var2) :-
 	subsumes_term(call(Var1),Var),
