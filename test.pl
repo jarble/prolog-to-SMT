@@ -13,9 +13,8 @@ demo :-
 	%A>1.1,
 	%B = sqrt(A),
 	%A = [1,2,3],
-	length(A,L),
-	length(B,L),
-	append(A,B,C).
+	A = 2.0,
+	C**3.0 is A**2.0.
 
 same_length(A,B) :-
     length(A,L),
